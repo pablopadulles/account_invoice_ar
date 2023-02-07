@@ -69,12 +69,12 @@ LINKS = {
     }
 
 requires = []
-for dep in info.get('depends', []):
-    if not re.match(r'(ir|res)(\W|$)', dep):
-        module_name = '%s_%s' % (MODULE2PREFIX.get(dep, 'trytond'), dep)
-        requires.append(get_require_version(module_name))
+# for dep in info.get('depends', []):
+#     if not re.match(r'(ir|res)(\W|$)', dep):
+#         module_name = '%s_%s' % (MODULE2PREFIX.get(dep, 'trytond'), dep)
+#         requires.append(get_require_version(module_name))
 
-requires.append(get_require_version('trytond'))
+# requires.append(get_require_version('trytond'))
 
 tests_require = [get_require_version('proteus'), 'pytz']
 dependency_links = list(LINKS.values())
