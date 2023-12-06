@@ -78,7 +78,7 @@ class Pos(ModelSQL, ModelView):
             },
         depends=['pos_type', 'active'],
         help='Habilita la facturación electrónica por webservices AFIP')
-    active = fields.Boolean('Active', select=True)
+    active = fields.Boolean('Active')
 
     del _states, _depends
 
@@ -127,9 +127,9 @@ class PosSequence(ModelSQL, ModelView):
     __name__ = 'account.pos.sequence'
 
     pos = fields.Many2One('account.pos', 'Point of Sale',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     invoice_type = fields.Selection(INVOICE_TYPE_POS,
-        'Tipo Comprobante AFIP', select=True, required=True,
+        'Tipo Comprobante AFIP', required=True,
         help='Tipo de Comprobante AFIP')
     invoice_type_string = invoice_type.translated('invoice_type')
     invoice_sequence = fields.Many2One('ir.sequence',

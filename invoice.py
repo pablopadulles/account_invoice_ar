@@ -220,7 +220,7 @@ class AfipWSTransaction(ModelSQL, ModelView):
     __name__ = 'account_invoice_ar.afip_transaction'
 
     invoice = fields.Many2One('account.invoice', 'Invoice',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     pyafipws_result = fields.Selection([
         ('', 'n/a'),
         ('A', 'Aceptado'),
@@ -422,7 +422,7 @@ class Invoice(metaclass=PoolMeta):
         ('3', '3-Productos y Servicios'),
         ('4', '4-Otros (exportación)'),
         ('', ''),
-        ], 'Concepto', select=True,
+        ], 'Concepto',
         states={
             #'required': Eval('_parent_pos', {}).get(
             #    'pos_type') == 'electronic',
@@ -454,7 +454,7 @@ class Invoice(metaclass=PoolMeta):
     transactions = fields.One2Many('account_invoice_ar.afip_transaction',
         'invoice', 'Transacciones', readonly=True)
     tipo_comprobante = fields.Selection(TIPO_COMPROBANTE, 'Comprobante',
-        select=True, states={
+        states={
             'invisible': Eval('type') == 'out',
             'readonly': Eval('state') != 'draft',
             },
@@ -1939,7 +1939,7 @@ class InvoiceExportLicense(ModelSQL, ModelView):
     __name__ = 'account.invoice.export.license'
 
     invoice = fields.Many2One('account.invoice', 'Invoice',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     license_id = fields.Char('License Id', required=True)
     afip_country = fields.Many2One('afip.country', 'AFIP Country',
         required=True)
@@ -2331,6 +2331,6 @@ class InvoiceCmpAsoc(ModelSQL):
     _table = 'account_invoice_cmp_asoc'
 
     invoice = fields.Many2One('account.invoice', 'Invoice',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     cmp_asoc = fields.Many2One('account.invoice', 'Cmp Asoc',
         ondelete='RESTRICT', required=True)
